@@ -1,0 +1,20 @@
+# Compilados
+bin/
+obj/
+# VS / Rider
+.vs/
+*.user
+*.suo
+*.userprefs
+# Publicaciones y paquetes
+*.nupkg
+*.snupkg
+*.Publish.xml
+# Logs
+*.log
+# Secretos locales (no subir claves)
+secrets.json
+*.env
+.env.*
+
+
