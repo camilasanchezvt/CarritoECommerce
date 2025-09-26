@@ -1,0 +1,22 @@
+# Compilados (en cualquier subcarpeta de CarritoECommerce)
+CarritoECommerce/**/bin/
+CarritoECommerce/**/obj/
+
+# VS / Rider (en cualquier subcarpeta de CarritoECommerce)
+CarritoECommerce/**/.vs/
+CarritoECommerce/**/*.user
+CarritoECommerce/**/*.suo
+CarritoECommerce/**/*.userprefs
+
+# Publicaciones y paquetes
+CarritoECommerce/**/*.nupkg
+CarritoECommerce/**/*.snupkg
+CarritoECommerce/**/*.Publish.xml
+
+# Logs
+CarritoECommerce/**/*.log
+
+# Secretos locales (no subir claves)
+CarritoECommerce/secrets.json
+CarritoECommerce/**/*.env
+CarritoECommerce/.env.*

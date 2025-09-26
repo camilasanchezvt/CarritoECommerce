@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace CarritoECommerce.Command
 {
-    public class Carrito
+    public class EditorCarrito
     {
-        private readonly Dictionary<string, Item> _items = new();
+
     }
 }

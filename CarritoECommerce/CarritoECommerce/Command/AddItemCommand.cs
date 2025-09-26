@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarritoECommerce.Interfaces
+namespace CarritoECommerce.Command
 {
-    internal interface ICommand
+    public class AgregarItemCommand
     {
+
     }
 }

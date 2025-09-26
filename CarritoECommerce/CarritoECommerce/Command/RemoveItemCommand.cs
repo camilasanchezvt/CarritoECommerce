@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CarritoECommerce.Command
 {
-    internal class SetCantidadCommand
+    public class QuitarItemCommand
     {
+
     }
 }
