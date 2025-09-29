@@ -29,7 +29,7 @@ namespace CarritoECommerce.Command
             if (_items.TryGetValue(Sku, out var existent)) // if que verifica que el sku del item exista dentro del dictionary
             {
                 _items.Remove(Sku);
-                return existent;   //si existe, elimina el item y retorna existente 
+                return existent;   //si existe, elimina el item y retorna existente (referencia)
             }
             else
             {
@@ -37,7 +37,7 @@ namespace CarritoECommerce.Command
             }
         }
 
-        public bool SetQuantity(string sku, int newQuantity) // metodo para actualiar la nueva cantidad del item, tomando su sku y el numero que corresponda
+        public bool SetQuantity(string sku, int newQuantity) // metodo para actualizar la nueva cantidad del item, tomando su sku y el numero que corresponda
         {
             if (_items.TryGetValue(sku, out var existent)) // verificamos que el item exista
             {
@@ -73,11 +73,11 @@ namespace CarritoECommerce.Command
             return total; // retornamos la variable con el total
         }
 
-        public Item GetItem(string sku) // metodo que 
+        public Item GetItem(string sku) // metodo que entrega un item mediante su sku (utilizado en AddItemCommand)
         {
-            if (_items.TryGetValue (sku, out var item))
+            if (_items.TryGetValue (sku, out var item)) // verificamos que si existe
             {
-                return new Item
+                return new Item // devolvemos una copia de este item (encapsulamiento)
                 {
                     Sku = item.Sku,
                     Name = item.Name,
@@ -85,7 +85,7 @@ namespace CarritoECommerce.Command
                     Quantity = item.Quantity
                 };
             }
-            return null;
+            return null; // si no cumple el if, devolvemos null
         }
     }
 }
