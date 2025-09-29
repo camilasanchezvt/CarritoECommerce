@@ -6,67 +6,86 @@ using System.Threading.Tasks;
 
 namespace CarritoECommerce.Command
 {
-    public class Carrito
+    public class Cart
     {
-        private readonly Dictionary<string, Item> _items = new();
+        private readonly Dictionary<string, Item> _items = new(); // dictionary privado de items (solo el carrito tiene acceso a este)
+                                                                  // Readonly para que no pueda reasignarse (apuntar a otro dictionary)
 
-        public void AgrgarItem(Item i)
+        public void AddItem(Item i) // metodo para agregar un item que toma como parametro un objet de este valor
         {
-            if (_items.TryGetValue(i.Sku, out var existente))
+            if (_items.TryGetValue(i.Sku, out var existent)) // if que verifica que exista el sku dentro del dictionary _items
             {
-                existente.Cantidad += i.Cantidad;
+                existent.Quantity += i.Quantity; // si ya existe el item dentro del carrito, le suma esta nueva cantidad.
+                                                 // (ejemplo: si habia 2 items y se deben agregar 3, el resultado final es 5)
             }
             else
             {
-                _items[i.Sku]= i;
+                _items[i.Sku]= i; //si no existe, lo agrega
             }
         }
 
-        public Item QuitarItem(string Sku)
+        public Item RemoveItem(string Sku) // metodo para quitar item, solo requiere el sku de este
         {
-            if (_items.TryGetValue(Sku, out var existente))
+            if (_items.TryGetValue(Sku, out var existent)) // if que verifica que el sku del item exista dentro del dictionary
             {
                 _items.Remove(Sku);
-                return existente;
+                return existent;   //si existe, elimina el item y retorna existente 
             }
             else
             {
-                Console.WriteLine("[ERROR] The item doesn't exists");
-                return null;
+                return null;   // si no existe, retorna nulo
             }
         }
 
-        public bool SetCantidad(string sku, int nuevaCantidad)
+        public bool SetQuantity(string sku, int newQuantity) // metodo para actualiar la nueva cantidad del item, tomando su sku y el numero que corresponda
         {
-            if (_items.TryGetValue(sku, out var existente))
+            if (_items.TryGetValue(sku, out var existent)) // verificamos que el item exista
             {
-                if (nuevaCantidad > 0)
+                if (newQuantity > 0)    // si es true, ahora verificamos que es mayor a cero
                 {
-                    existente.Cantidad = nuevaCantidad;
+                    existent.Quantity = newQuantity;
                     return true;
                 }
-                else
+                else if (newQuantity == 0) // en caso de ser igual a cero, removemos porque no hay tal item
                 {
-                    Console.WriteLine("La cantidad debe ser mayor a 0");
+                    _items.Remove(sku); 
+                    return true;
+                }
+                else // de no serlo, devolvemos false
+                {
                     return false;
                 }
             }
-            else
+            else // de no existir el item, devolvemos false
             {
-                Console.WriteLine($"El item con SKU: {sku} no existe dentro del carrito.");
                 return false;
             }
         }
 
-        public decimal Subtotal()
+        public decimal Subtotal() // metodo que retorna el subtotal en valor decimal
         {
-            decimal total = 0;
+            decimal total = 0; // variable para almacenar el total
             
-            foreach (var i in _items.Values)
+            foreach (var i in _items.Values) // foreach que recorre el dictionary
             {
-                total += i.Precio * i.Cantidad;
+                total += i.Price * i.Quantity; // multiplicamos el precio por la cantidad del item y lo almacenamos en la variable
             }
-            return total;
+            return total; // retornamos la variable con el total
+        }
+
+        public Item GetItem(string sku) // metodo que 
+        {
+            if (_items.TryGetValue (sku, out var item))
+            {
+                return new Item
+                {
+                    Sku = item.Sku,
+                    Name = item.Name,
+                    Price = item.Price,
+                    Quantity = item.Quantity
+                };
+            }
+            return null;
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace CarritoECommerce.Interfaces
 {
-    public interface ICarritoPort
+    public interface ICartPort
     {
         decimal Subtotal(); // suma el total (precio * cantidad)
         void Run(ICommand cmd); // ejecuta un comando y lo guarda en historial

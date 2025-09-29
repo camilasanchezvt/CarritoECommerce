@@ -9,9 +9,9 @@ namespace CarritoECommerce.Command
     public class Item
     {
         public string Sku { get; init; }
-        public string Nombre { get; init; } = "";
-        public decimal Precio { get; init; }
-        public int Cantidad { get; set; }
+        public string Name { get; init; } = "";
+        public decimal Price { get; init; }
+        public int Quantity { get; set; }
     }
 }
 }
