@@ -9,24 +9,27 @@ namespace CarritoECommerce.Command
 {
     public class CartPort : ICartPort
     {
-        public void Redo()
-        {
-            
-        }
+        private readonly Cart cart = new(); // carrito
+        private readonly CartEditor editor= new(); // invoker
 
-        public void Run(ICommand cmd)
+        public void Run(ICommand cmd) 
         {
-            
+            editor.Run(cmd);
         }
 
         public decimal Subtotal()
         {
-            
+            return cart.Subtotal();
         }
 
         public void Undo()
         {
-            
+            editor.Undo();
         }
+        public void Redo()
+        {
+            editor.Redo();
+        }
+
     }
 }
