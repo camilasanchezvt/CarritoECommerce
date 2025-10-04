@@ -1,0 +1,25 @@
+# Compilados
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userprefs
+
+# Publicaciones y paquetes
+*.nupkg
+*.snupkg
+*.Publish.xml
+
+# Logs
+*.log
+
+# Secretos locales
+secrets.json
+*.env
+.env.*
+
+# Rider IDE
+.idea/
