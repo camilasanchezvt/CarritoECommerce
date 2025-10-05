@@ -20,7 +20,7 @@ namespace CarritoECommerce.Command
             _redoStack.Clear(); //en cuanto entra un nuevo comando, se borra el historial de redo
         }
 
-        public void Undo()
+        public void Undo() 
         {
             if (_undoStack.Count == 0) return; // no hay comandos hechos, no hay nada que deshacer
             
