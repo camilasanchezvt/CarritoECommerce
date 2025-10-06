@@ -84,10 +84,14 @@ Este sistema puede adaptarse a distintos rubros:
 7. El sistema muestra un mensaje de confirmación y finaliza la compra.  
 
 ---
-
 ## 🗺 UML
-📌 ![Diagrama UML]()  
+📌 Diagrama general del sistema:
 
+<p align="center">
+  <img src="Imagen.Uml/DiagramaUML.png" alt="Diagrama UML" />
+</p>
+
+---
 ---
 
 ## 🔮 Retos futuros
