@@ -5,32 +5,38 @@ namespace CarritoECommerce.Core.Command
 {
     public class CartPort : ICartPort
     {
-        private readonly Stack<ICommand> _undoStack = new(); // para guardar los comandos ejecutados
-        private readonly Stack<ICommand> _redoStack = new(); // para los comandos que fueron deshechos
+        private readonly Stack<ICommand> _undoStack = new();
+        private readonly Stack<ICommand> _redoStack = new();
 
-        public void Run(ICommand cmd) // metodo para ejecutar un comando 
+        public void Run(ICommand cmd)
         {
             cmd.Execute();
-            _undoStack.Push(cmd); // guarda el comando en el historial de comandos ejecutados
-            _redoStack.Clear(); //en cuanto entra un nuevo comando, se borra el historial de redo
+            _undoStack.Push(cmd);
+            _redoStack.Clear();
         }
 
         public void Undo()
         {
-            if (_undoStack.Count == 0) return; // no hay comandos hechos, no hay nada que deshacer
+            if (_undoStack.Count == 0) return;
 
-            var cmd = _undoStack.Pop(); // saca el ultimo comando hecho y lo guarda en cmd
-            cmd.Undo(); // lo deshace
-            _redoStack.Push(cmd); // lo guarda en Redo
+            var cmd = _undoStack.Pop();
+            cmd.Undo();
+            _redoStack.Push(cmd);
         }
 
         public void Redo()
         {
-            if (_redoStack.Count == 0) return; // si no hay nada deshecho, no hay nada que rehacer
+            if (_redoStack.Count == 0) return;
 
-            var cmd = (_redoStack.Pop()); // agarra el ultimo comando deshecho y lo guarda en cmd
-            cmd.Execute(); // lo rehace
-            _undoStack.Push(cmd); // lo guarda en Undo
+            var cmd = _redoStack.Pop();
+            cmd.Execute();
+            _undoStack.Push(cmd);
+        }
+
+        public decimal Subtotal()
+        {
+            // Temporal: devuelve 0 hasta que se implemente el cálculo real
+            return 0m;
         }
     }
 }

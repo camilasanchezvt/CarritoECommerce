@@ -24,11 +24,11 @@ namespace CarritoECommerce.Core.Command
             }
         }
 
-        public Item RemoveItem(string Sku) // metodo para quitar item, solo requiere el sku de este
+        public Item RemoveItem(string sku) // metodo para quitar item, solo requiere el sku de este
         {
-            if (_items.TryGetValue(Sku, out var existent)) // if que verifica que el sku del item exista dentro del dictionary
+            if (_items.TryGetValue(sku, out var existent)) // if que verifica que el sku del item exista dentro del dictionary
             {
-                _items.Remove(Sku);
+                _items.Remove(sku);
                 return existent;   //si existe, elimina el item y retorna existente (referencia)
             }
             else
@@ -86,6 +86,23 @@ namespace CarritoECommerce.Core.Command
                 };
             }
             return null; // si no cumple el if, devolvemos null
+        }
+
+        // ==========================================================
+        // DumpItems: método para "volcar" todos los items actuales
+        // ==========================================================
+        public List<Item> DumpItems()
+        {
+            // Retorna una lista de copias de los items actuales
+            return _items.Values
+                         .Select(i => new Item
+                         {
+                             Sku = i.Sku,
+                             Name = i.Name,
+                             Price = i.Price,
+                             Quantity = i.Quantity
+                         })
+                         .ToList();
         }
     }
 }

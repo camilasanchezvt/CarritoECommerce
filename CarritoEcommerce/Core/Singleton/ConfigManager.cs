@@ -7,7 +7,7 @@
 
         public static ConfigManager Instance => _instance;
 
-        public decimal EnvioGratisDesde { get; set; }
+        public decimal EnvioGratisDesde { get; set; } = 50000m;
+        public decimal IVA { get; set; } = 0.21m; // 21% por defecto
     }
 }
-

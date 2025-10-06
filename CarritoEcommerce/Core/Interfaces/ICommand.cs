@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarritoECommerce.Core.Interfaces
 {
-    internal interface ICommand
+    public interface ICommand
     {
         void Execute(); // ejecuta
         void Undo(); // deshace
