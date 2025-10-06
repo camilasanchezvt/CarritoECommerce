@@ -1,15 +1,13 @@
 ﻿using System;
-using DeliveryGo.Core.Carrito;
-using DeliveryGo.Core.Envio;
-using DeliveryGo.Core.Order;
-using DeliveryGo.Core.Payment;
-using DeliveryGo.Core.Facade;
-using DeliveryGo.Core.Config;
+using CarritoECommerce.Core.Order;
+using CarritoECommerce.Core.Payment;
 using CarritoECommerce.Core.Facade;
 using CarritoECommerce.Core.Order.Observers;
 using CarritoECommerce.Core.Services;
 using Etapa2Envios.Core.Singleton;
 using Etapa2Envios.Core.Strategy;
+using CarritoECommerce.Core.Interfaces;
+using CarritoECommerce.Core.Command;
 
 namespace DeliveryGo
 {
@@ -26,7 +24,7 @@ namespace DeliveryGo
             ConfigManager.Instance.IVA = 0.21m;                // 21% de IVA
 
             // Interfaces base
-            ICarritoPort carrito = new CarritoPort();
+            ICartPort carrito = new CartAdapter();
             IEnvioStrategy envio = new EnvioMoto(); // Estrategia de envío por defecto
             PedidoService pedidos = new PedidoService();
 
@@ -52,7 +50,7 @@ namespace DeliveryGo
             while (!salir)
             {
                 // Menú de opciones principal
-                Console.WriteLine("\n=== 🛵 DELIVERY GO - MENÚ PRINCIPAL ===");
+                Console.WriteLine("\n=== DELIVERY GO - MENÚ PRINCIPAL ===");
                 Console.WriteLine("1. Agregar ítem");
                 Console.WriteLine("2. Cambiar cantidad");
                 Console.WriteLine("3. Quitar ítem");
@@ -140,7 +138,7 @@ namespace DeliveryGo
                         else if (tipoEnvio == "correo")
                             nuevaEstrategia = new EnvioCorreo();
                         else
-                            nuevaEstrategia = new EnvioRetiro();
+                            nuevaEstrategia = new RetiroEnTienda();
 
                         facade.ElegirEnvio(nuevaEstrategia);
                         Console.WriteLine($"📦 Envío cambiado a: {tipoEnvio.ToUpper()}");
@@ -182,14 +180,14 @@ namespace DeliveryGo
                     // 🔔 (Des)Suscribir Logística
                     // ==========================================================
                     case "10":
-                        if (logisticaObs.Suscripto)
+                        if (logisticaObs.Suscripto) // revisa si ya está suscripto
                         {
-                            logisticaObs.Desuscribir(pedidos);
+                            logisticaObs.Desuscribir(pedidos); // desuscribir
                             Console.WriteLine("🚫 Logística desuscripta.");
                         }
                         else
                         {
-                            logisticaObs.Suscribir(pedidos);
+                            logisticaObs.Suscribir(pedidos); // suscribir
                             Console.WriteLine("✅ Logística suscripta.");
                         }
                         break;

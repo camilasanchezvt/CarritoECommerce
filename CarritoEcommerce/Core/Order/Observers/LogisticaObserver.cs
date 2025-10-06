@@ -7,12 +7,19 @@ namespace CarritoECommerce.Core.Order.Observers
     // LogisticaObserver: actualiza tablero/logística (simulado con Console.WriteLine)
     public class LogisticaObserver
     {
-        public void Suscribir(PedidoService service) => service.EstadoCambiado += Handle;
-        public void Desuscribir(PedidoService service) => service.EstadoCambiado -= Handle;
+        // Propiedad que indica si está suscripto o no
+        public bool Suscripto { get; private set; } = false;
 
-        private void Handle(object sender, PedidoEstadoEventArgs e)
+        public void Suscribir(PedidoService pedidos)
         {
-            Console.WriteLine($"[LogisticaObserver] Tablero logística: Pedido {e.Pedido.Id} -> {e.NuevoEstado}");
+            // Lógica de suscripción
+            Suscripto = true;
+        }
+
+        public void Desuscribir(PedidoService pedidos)
+        {
+            // Lógica de desuscripción
+            Suscripto = false;
         }
     }
 }

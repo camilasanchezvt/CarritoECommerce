@@ -47,9 +47,13 @@ namespace CarritoECommerce.Core.Facade
         // Cambia cantidad: ejecuta SetQuantityCommand (usa la clase que ya tenés)
         public void CambiarCantidad(string sku, int cantidad)
         {
-            // tu SetQuantityCommand está en el namespace SetQuantityCommand.SetQuantityCommand class
-            var cmd = new SetQuantityCommand.SetQuantityCommand(_cartAdapter.InternalCart, sku, cantidad);
+            // Asegurate de tener el using correcto arriba:
+            // using CarritoECommerce.Core.Command;
+
+            // Instanciamos el comando directamente, sin repetir namespace
+            var cmd = new SetQuantityCommand(_cartAdapter.InternalCart, sku, cantidad);
             _carritoPort.Run(cmd);
+
             Console.WriteLine($"[Facade] Cambiada cantidad de {sku} a {cantidad}");
         }
 
