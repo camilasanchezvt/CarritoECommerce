@@ -86,7 +86,7 @@ Este sistema puede adaptarse a distintos rubros:
 ---
 
 ## 🗺 UML
-📌 ![Diagrama UML](https://github.com/tuusuario/tu-repo/blob/main/img/diagrama.png?raw=true)  
+📌 ![Diagrama UML]()  
 
 ---
 
